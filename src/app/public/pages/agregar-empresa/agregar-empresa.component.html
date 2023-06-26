@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+
+<div class="lg:px-8 md:px-6 px-4 py-8 ng-star-inserted bg-blue-50 min-h-screen">
+    <div class="mb-6">
+        <h1>Market Share</h1>
+    </div>
+    <div class="surface-card shadow-2 border-round p-4">
+        <div class="text-xl text-900 font-medium mb-6">Agregar Una Nueva Empresa</div>
+        <form [formGroup]="miFormulario" (ngSubmit)="onSubmit()" class="grid formgrid p-fluid m-3 mb-6">
+            <div class="filed mb-4 col-12">
+                <label for="nombre" class="font-medium text-900 mb-2">Nombre</label>
+                <input formControlName="name" type="text" pInputText id="nombre"/>
+                <div class="text-red-500" *ngIf="miFormulario.get('name')?.touched && miFormulario.get('name')?.errors?.['required']">
+                    El nombre es requerido.
+                </div>
+            </div>
+            <div class="filed mb-4 col-12 lg:col-6">
+                <label for="email" class="font-medium text-900 mb-2">Email</label>
+                <input formControlName="email" type="email" pInputText id="email"/>
+                <div *ngIf="miFormulario.get('email')?.touched && miFormulario.get('email')?.errors">
+                    <div class="text-red-500" *ngIf="miFormulario.get('email')?.errors?.['required']">
+                      El email es requerido.
+                    </div>
+                    <div class="text-red-500" *ngIf="miFormulario.get('email')?.errors?.['email']">
+                      El email no es válido.
+                    </div>
+                  </div>
+            </div>
+            <div class="filed mb-4 col-12 lg:col-6">
+                <label for="direccion" class="font-medium text-900 mb-2">Direccion</label>
+                <input formControlName="address" type="text" pInputText id="direccion"/>
+                <div class="text-red-500" *ngIf="miFormulario.get('address')?.touched && miFormulario.get('address')?.errors?.['required']">
+                    La direccion es requerida.
+                </div>
+            </div>
+            <div class="filed mb-4 col-12">
+                <label for="descripcion" class="font-medium text-900 mb-2">Descripcion</label>
+                <textarea formControlName="description" rows="5" cols="30" pInputTextarea></textarea>
+                <div class="text-red-500" *ngIf="miFormulario.get('description')?.touched && miFormulario.get('description')?.errors?.['required']">
+                    La descripcion es requerida.
+                </div>
+            </div>
+            <div class="field col-12 mb-4">
+                <div class="flex justify-content-end">
+                    <p-button *ngIf="miFormulario.get('id')?.value != ''" type="submit" label="Editar Empresa" styleClass="p-button-outlined p-button-success"></p-button>
+                    <p-button *ngIf="miFormulario.get('id')?.value == ''" type="submit" label="Agregar Empresa" styleClass="p-button-outlined p-button-success"></p-button>
+                </div>
+            </div>   
+        </form>
+    </div>
+</div>

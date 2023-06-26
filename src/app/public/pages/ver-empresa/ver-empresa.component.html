@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+
+<div class="lg:px-8 md:px-6 px-4 py-8 ng-star-inserted bg-blue-50 min-h-screen">
+    <div class="mb-6">
+        <h1>Market Share</h1>
+    </div>
+
+    <div class="surface-card shadow-2 border-round p-4 mb-4">
+        <div class="text-xl text-900 font-medium mb-5">Empresa</div>
+        <div >
+            <div class="text-xl text-900 font-medium mb-3">{{ company.name }}</div>
+            <div class="text-700 mb-2">
+                {{ company.description }}
+            </div>
+            <div class="grid">
+                <div class="col-6">
+                    Correo: <span class="text-700">{{ company.email }}</span>
+                </div>
+                <div class="col-6">
+                    Direccion: <span class="text-700">{{ company.address }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="col-12 lg:col-6">
+            <div class="surface-card shadow-2 border-round p-4">
+                <div class="grid">
+                    <div class="col-7">
+                        <div class="text-xl text-900 font-medium mb-5">Productos</div>
+                    </div>
+                    <div class="col-5">
+                        <p-button (click)="showDialog()" label="Agregar Productos" styleClass="p-button-outlined p-button-success"></p-button>
+                    </div> 
+                </div>
+                <div *ngFor="let product of company.products">
+                    <div class="grid cursor-pointer" (click)="cargarGraficas(product)">
+                        <div class="col-8">
+                            <div class="font-medium text-900 my-2">
+                                {{ product.name }}
+                            </div>
+                            <div class="line-height-3 text-600 white-space-normal">
+                                {{ product.description }}
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <p-button (click)="showDialog2(product)" label="Agregar Venta" styleClass="p-button-outlined p-button-success"></p-button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-12 lg:col-6">
+            <div class="surface-card shadow-2 border-round p-4">
+                <p-chart type="line" [data]="data" [options]="options"></p-chart>
+            </div>
+        </div>
+    </div>
+
+    <p-dialog header="Agregar productos a la comapañia" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+        <form [formGroup]="miFormulario" (ngSubmit)="onSave()" class="grid formgrid p-fluid m-3">
+            <div class="filed mb-6 col-12">
+                <label for="nombre" class="font-medium text-900">Producto</label>
+                <p-multiSelect appendTo="body" [options]="products" formControlName="productsId" optionLabel="name"></p-multiSelect>
+            </div>
+            <p-button type="submit" label="Agregar Productos" styleClass="p-button-outlined p-button-success"></p-button>
+        </form>
+    </p-dialog>
+
+    <p-dialog header="Agregar productos a la comapañia" [(visible)]="visible2" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+        <form [formGroup]="miFormulario2" (ngSubmit)="onSaveVenta()" class="grid formgrid p-fluid m-3">
+            <div class="filed mb-6 lg:col-6 col-12">
+                <label for="venta" class="font-medium text-900">Cantidad</label>
+                <input formControlName="venta" type="text" pInputText id="venta"/>
+            </div>
+            <div class="filed mb-6 lg:col-6 col-12">
+                <label for="fecha" class="font-medium text-900">Fecha</label>
+                <p-calendar appendTo="body" formControlName="fecha"></p-calendar>
+            </div>
+            <p-button type="submit" label="Agregar Venta" styleClass="p-button-outlined p-button-success"></p-button>
+        </form>
+    </p-dialog>
+</div>
