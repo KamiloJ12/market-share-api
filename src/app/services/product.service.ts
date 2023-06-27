@@ -10,22 +10,22 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   obtenerDatos(): Observable<any> {
-    const url = 'https://market-share-api-back.onrender.com//api/v1/products/';
+    const url = 'https://market-share-api-back.onrender.com/api/v1/products/';
     return this.http.get<any>(url);
   }
 
   obtenerDatosPorId(id:number): Observable<any> {
-    const url = 'https://market-share-api-back.onrender.com//api/v1/product/' + id;
+    const url = 'https://market-share-api-back.onrender.com/api/v1/product/' + id;
     return this.http.get<any>(url);
   }
 
   agregar(data: any): Observable<any> {
-    const url = 'https://market-share-api-back.onrender.com//api/v1/product/';
+    const url = 'https://market-share-api-back.onrender.com/api/v1/product/';
     return this.http.post<any>(url, data);
   }
   
   actualizar(data: any): Observable<any> {
-    const url = 'https://market-share-api-back.onrender.com//api/v1/product/' + data.id;
+    const url = 'https://market-share-api-back.onrender.com/api/v1/product/' + data.id;
     return this.http.put<any>(url, data);
   }
 }
